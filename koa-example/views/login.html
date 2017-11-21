@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+        <ul>
+          <li>用户名<input type="text" id="name" name="user"></li>
+          <li>密码<input type="password" id="password" name="password"></li>
+          <li><input type="button" id="J-login" value="提交"></li>
+        </ul>
+    <script>
+        $(function(){
+          $('#J-login').on('click',function(){
+            var name = $('#name').val();
+            var pass = $('#password').val();
+             $.ajax({
+               url:'/loginPost',
+               type:'post',
+               data:{user:name,password:pass}
+             }).then(function(res){
+               if(res.code == 1){
+                alert('登录成功')
+               }else{
+                 alert('err')
+               }
+             })
+          })
+        })
+    </script>
+</body>
+</html>
