@@ -54,6 +54,7 @@ export default instance;
 ```
 
 ### 后端(node) 我们封装了一个中间件 在需要验证token的路由，加上这个中间件
+```
 
  router.get('/dosh',checkToken,User.dosh)
 
@@ -95,5 +96,6 @@ module.exports = async ( ctx, next ) => {
         }
     }
 };
+```
 
 
