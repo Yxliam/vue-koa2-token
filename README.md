@@ -51,6 +51,27 @@ instance.interceptors.response.use(
 );
 
 export default instance;
+ 然后在路由文件中
+ //注册全局钩子用来拦截导航
+router.beforeEach((to, from, next) => {
+  //获取store里面的token
+  let token = store.state.token;
+  //判断要去的路由有没有requiresAuth
+  if(to.meta.requiresAuth){
+
+    if(token){
+      next();
+    }else{
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }  // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
+      });
+    }
+
+  }else{
+    next();//如果无需token,那么随它去吧
+  }
+});
 ```
 
 ### 后端(node) 我们封装了一个中间件 在需要验证token的路由，加上这个中间件
