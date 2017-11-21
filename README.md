@@ -70,7 +70,7 @@ router.beforeEach((to, from, next) => {
     }
 
   }else{
-    next();//如果无需token,那么随它去吧
+    next();
   }
 });
 ```
